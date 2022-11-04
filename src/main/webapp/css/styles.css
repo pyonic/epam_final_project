@@ -1,0 +1,94 @@
+.banner {
+    width: 100%;
+    text-align: center;
+    padding-top: 50px;
+    overflow: hidden;
+}
+.banner_title {
+    font-size: 60px;
+    font-weight: 800;
+}
+.search_box {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.search_btn {
+    position: relative;
+    transform: translateX(-10px);
+}
+.search_input > input {
+    height: 38px;
+    width: 400px;
+    font-weight: 500;
+    outline: none;
+}
+button {
+    width: 100px !important;
+    font-weight: bold !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+}
+.cnt {
+    max-width: 90%;
+    margin: 0 auto;
+}
+.latest_medicines {
+    margin-top: 50px;
+}
+.latest_medicines > .title {
+    font-size: 20px;
+    font-weight: bold;
+}
+.list_item {
+    display: flex;
+    margin: 20px 0;
+    align-items: center;
+    justify-content: space-between;
+    align-content: center;
+    border-bottom: 1px solid rgb(184, 176, 176);
+}
+.m_info {
+    display: flex;
+}
+.m_title {
+    font-size: 20px;
+    margin-right: 20px;
+    position: relative;
+}
+.m_title::after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    right: -10px;
+    background: rgb(121, 112, 112);
+}
+.m_description {
+    align-self: center;
+    max-width: 400px;
+}
+.m_actions {
+    display: flex;
+}
+.m_price {
+    font-size: 25px;
+    font-weight: bold;
+    padding-right: 20px;
+    position: relative;
+}
+.m_price::after {
+    content: '$';
+    position: absolute;
+    font-size: 15px;
+    color: rgb(19, 139, 219);
+}
+.tobottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.total_price {
+    display: flex;
+    justify-content: end;
+}
