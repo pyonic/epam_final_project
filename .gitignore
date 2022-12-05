@@ -71,6 +71,7 @@ nb-configuration.xml
 .idea/
 *.iml
 *.iws
+*.conf
 
 # Mac
 .DS_Store

@@ -1,19 +1,22 @@
 package com.epammurodil.libs;
 
-import com.epammurodil.database.DatabaseConnection;
+import com.epammurodil.model.database.DatabaseConnection;
 
 import java.sql.*;
 import java.util.Map;
 
 public class TableManager {
-    private Connection connection = null;
+    private static Connection connection;
 
-    public TableManager() throws SQLException {
-        DatabaseConnection dbcon = new DatabaseConnection("jdbc:postgresql://localhost/test", "postgres", "root");
-        this.connection = (Connection) dbcon;
+    {
+        try {
+            connection = DatabaseConnection.getConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public ResultSet getOne(String table, Map<String, String> filters) throws SQLException {
+    public static ResultSet getOne(String table, Map<String, String> filters) throws SQLException {
         StringBuilder query = new StringBuilder("SELECT * FROM " + table);
         StringBuilder filter = new StringBuilder();
 
@@ -22,7 +25,7 @@ public class TableManager {
         }
         query.append(" " + filter.substring(0, filter.length() - 1) + " LIMIT 1");
 
-        Statement statement = this.connection.createStatement();
+        Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query.toString());
 
         ResultSet result = null;
@@ -30,7 +33,7 @@ public class TableManager {
         return result;
     }
 
-    public ResultSet getAll(String table, Map<String, String> filters) throws SQLException {
+    public static ResultSet getAll(String table, Map<String, String> filters) throws SQLException {
         StringBuilder query = new StringBuilder("SELECT * FROM " + table);
         StringBuilder filter = new StringBuilder();
 
@@ -39,14 +42,15 @@ public class TableManager {
         }
         query.append(" " + filter.substring(0, filter.length() - 1));
 
-        Statement statement = this.connection.createStatement();
+        Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query.toString());
 
         return resultSet;
     }
 
-    public ResultSet executeStatement(String query, Boolean update) throws SQLException {
-        Statement statement = this.connection.createStatement();
+    public static ResultSet executeStatement(String query, Boolean update) throws SQLException {
+        Connection connection1 = DatabaseConnection.getConnection();
+        Statement statement = connection1.createStatement();
         ResultSet resultSet = null;
         if (update) {
             statement.executeUpdate(query);
@@ -56,7 +60,7 @@ public class TableManager {
         return resultSet;
     }
 
-    public ResultSet executePreparedStatement(String query, String[] params, Boolean update) throws SQLException {
+    public static ResultSet executePreparedStatement(String query, String[] params, Boolean update) throws SQLException {
         ResultSet resultSet = null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -69,5 +73,21 @@ public class TableManager {
             e.printStackTrace();
         }
         return resultSet;
+    }
+
+    public static boolean update(String table, Map<String, String> updateFields, Map<String, String> filters) throws SQLException {
+        StringBuilder UPDATE_QUERY = new StringBuilder("UPDATE " + table + " SET ");
+        for(Map.Entry<String, String> f: updateFields.entrySet()) {
+            UPDATE_QUERY.append(f.getKey() + "=" + f.getValue() + ",");
+        }
+        UPDATE_QUERY.deleteCharAt(UPDATE_QUERY.length() - 1);
+        UPDATE_QUERY.append(" WHERE ");
+        for(Map.Entry<String, String> f: filters.entrySet()) {
+            UPDATE_QUERY.append(f.getKey() + "=" + f.getValue() + ",");
+        }
+        UPDATE_QUERY.deleteCharAt(UPDATE_QUERY.length() - 1);
+        System.out.println(UPDATE_QUERY);
+        Statement statement = connection.createStatement();
+        return statement.executeUpdate(UPDATE_QUERY.toString()) == 1;
     }
 }

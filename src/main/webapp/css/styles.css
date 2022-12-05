@@ -1,17 +1,59 @@
+body {
+    min-height: 110vh;
+    background-color: #eef0f1;
+}
+
+.med_links {
+    text-decoration: none;
+    border: 1px solid silver;
+    border-radius: 5px;
+    margin-bottom: 2px;
+    color: rgb(5, 4, 4);
+}
+.med_title {
+    text-decoration: none !important;
+    color: rgb(54, 18, 18);
+}
+.med_title:hover {
+    text-decoration: none !important;
+}
+.search_field {
+    border: none;
+    border-radius: 5px;
+    padding-left: 12px;
+    box-shadow: rgb(207 207 209) -1px 1px 10px;
+}
+.search_item {
+    border-radius: 5px;
+    padding: 10px 5px;
+    background: #fff;
+    display: flex;
+    font-weight: bold;
+}
+
 .banner {
     width: 100%;
     text-align: center;
     padding-top: 50px;
-    overflow: hidden;
 }
 .banner_title {
     font-size: 60px;
     font-weight: 800;
 }
+.search_results {
+    position: absolute;
+    top: 41px;
+    left: 474px;
+    display: flex;
+    flex-direction: column;
+    width: 403px;
+    /* background: #000; */
+}
 .search_box {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    position: relative;
 }
 .search_btn {
     position: relative;
@@ -22,6 +64,7 @@
     width: 400px;
     font-weight: 500;
     outline: none;
+    transition-duration: 0.8s;
 }
 button {
     width: 100px !important;
@@ -55,6 +98,7 @@ button {
     font-size: 20px;
     margin-right: 20px;
     position: relative;
+    min-width: 135px;
 }
 .m_title::after {
     content: '';
@@ -91,4 +135,164 @@ button {
 .total_price {
     display: flex;
     justify-content: end;
+}
+.login_box {
+    max-width: 40%;
+    margin: 0 auto;
+    padding-top: 15px;
+}
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.field_group {
+    display: flex;
+    justify-content: space-between;
+}
+.main_footer {
+    display: none;
+    opacity: 0;
+    transition-duration: 0.5s;
+}
+
+/* Medicine page */
+
+.to_left {
+    text-align: left !important;
+}
+.mb0 {
+    margin-bottom: 0 !important;
+}
+.lb {
+    border-bottom: 1px solid silver;
+}
+.key_value_box {
+    margin: 10px 0px;
+    font-weight: 400;
+}
+.exclamation {
+    font-size: 12px;
+}
+.kv_item {
+    display: flex;
+    margin-bottom: 5px;
+}
+.key {
+    min-width: 10%;
+    font-weight: bold;
+}
+.value {
+    max-width: 90%;
+    min-width: 90%;
+    padding-bottom: 5px;
+    border-bottom: 1px solid silver;
+}
+.smaller {
+    font-size: 12px;
+    font-weight: bold;
+}
+.action_box {
+    display: flex;
+    align-items: flex-end;
+    align-content: flex-end;
+    justify-content: end;
+}
+.order_btn {
+    width: 80px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: rgb(30, 125, 214);
+    border-radius: 5px;
+}
+.order_btn > a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none !important;
+}
+a:hover {
+    color: white !important;
+    text-decoration: none;
+}
+.ratings_box {
+    margin-bottom: 10px;
+}
+.ratings_title {
+    font-weight: bold;
+    font-size: 25px;
+    border-bottom: 1px solid silver;
+    margin-bottom: 10px;
+}
+
+
+/* 404 */
+.tcc {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.bit_title {
+    font-weight: bold;
+    font-size: 90px;
+}
+.reviewbtn {
+    font-size: 13px !important;
+    width: 110px !important;
+    padding: 9px 0 !important;
+    border-radius: 5px !important;
+    margin-left: 10px;
+}
+.order_item {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid silver;
+    padding: 10px;
+    border-radius: 5px;
+    transition-duration: 0.5s;
+}
+.order_item:hover {
+    transform: scale(1.03);
+}
+.price {
+    font-size: 30px;
+    font-weight: bold;
+}
+.order_medicine {
+    font-size: 20px;
+    font-weight: bold;
+}
+.order_info {
+    font-size: 15px;
+    min-width: 20px;
+}
+.order_info > div {
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: start;
+}
+.info_log {
+    min-width: 20px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+}
+.order_actions {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    align-content: center;
+}
+.ssl {
+    height: 37px;
 }
