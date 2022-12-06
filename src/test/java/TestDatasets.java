@@ -11,4 +11,6 @@ public class TestDatasets {
     public static final String MEDICINE_NAME = "Test medicine";
     public static final String MEDICINE_DESCRIPTION = "Test medicine description";
     public static final BigDecimal MEDICINE_PRICE = BigDecimal.valueOf(Float.valueOf("0.5"));
+
+
 }

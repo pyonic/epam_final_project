@@ -1,6 +1,14 @@
 package com.epammurodil.controller.command;
 
 import com.epammurodil.controller.command.impl.*;
+import com.epammurodil.controller.command.impl.account.AccountsCommand;
+import com.epammurodil.controller.command.impl.account.LogOutCommand;
+import com.epammurodil.controller.command.impl.account.SignInCommand;
+import com.epammurodil.controller.command.impl.account.SignUpCommand;
+import com.epammurodil.controller.command.impl.medicine.*;
+import com.epammurodil.controller.command.impl.order.MakeOrderCommand;
+import com.epammurodil.controller.command.impl.order.OrdersCommand;
+import com.epammurodil.controller.command.impl.receipt.ReceiptsCommand;
 
 public enum CommandType {
     DEFAULT(new DefaultCommand()),

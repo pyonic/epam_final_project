@@ -1,4 +1,4 @@
-package com.epammurodil.controller.command.impl;
+package com.epammurodil.controller.command.impl.account;
 
 import static com.epammurodil.constants.EntityFields.*;
 

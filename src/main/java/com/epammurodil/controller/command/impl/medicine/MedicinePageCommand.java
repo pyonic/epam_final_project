@@ -1,4 +1,4 @@
-package com.epammurodil.controller.command.impl;
+package com.epammurodil.controller.command.impl.medicine;
 
 import com.epammurodil.constants.QueryConstants;
 import com.epammurodil.constants.ControllerConstants;

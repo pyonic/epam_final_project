@@ -1,5 +1,6 @@
 package com.epammurodil.model.dao.impl;
 
+import com.epammurodil.constants.QueryConstants;
 import com.epammurodil.model.EntityQueries.RatingsQueries;
 import com.epammurodil.model.dao.EntityDao;
 import com.epammurodil.model.database.DatabaseConnection;
@@ -47,12 +48,12 @@ public class RatingsDao implements EntityDao<Rating> {
             preparedStatement.setInt(1, medicine_id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int medicineId = resultSet.getInt("medicine_id");
-                int accountId = resultSet.getInt("account_id");
-                int rate = resultSet.getInt("rating");
-                String body = resultSet.getString("body");
-                String autorName = resultSet.getString("first_name");
-                String autorSurName = resultSet.getString("last_name");
+                int medicineId = resultSet.getInt(QueryConstants.MEDICINE_ID);
+                int accountId = resultSet.getInt(QueryConstants.ACCOUNT_ID);
+                int rate = resultSet.getInt(QueryConstants.RATING);
+                String body = resultSet.getString(QueryConstants.BODY);
+                String autorName = resultSet.getString(QueryConstants.FIRST_NAME);
+                String autorSurName = resultSet.getString(QueryConstants.LAST_NAME);
                 Rating rating = new Rating(medicineId, accountId, rate, body, autorName, autorSurName);
                 ratings.add(rating);
             }

@@ -1,5 +1,6 @@
 package com.epammurodil.model.dao.impl;
 
+import static com.epammurodil.constants.QueryConstants.*;
 import com.epammurodil.model.EntityQueries.MedicineQueries;
 import com.epammurodil.model.dao.EntityDao;
 import com.epammurodil.model.database.DatabaseConnection;
@@ -26,14 +27,14 @@ public class MedicineDao implements EntityDao<Medicine> {
     public List<Medicine> parseResult(ResultSet resultSet) throws SQLException {
         List<Medicine> medicines = new ArrayList<>();
         while (resultSet.next()) {
-            int id = resultSet.getInt("id");
-            String title = resultSet.getString("title");
-            String description = resultSet.getString("description");
-            BigDecimal price = resultSet.getBigDecimal("price");
-            String slug = resultSet.getString("slug");
-            Boolean need_receipt = resultSet.getBoolean("need_receipt");
-            Timestamp created_at = resultSet.getTimestamp("created_at");
-            Timestamp updated_at = resultSet.getTimestamp("updated_at");
+            int id = resultSet.getInt(ID);
+            String title = resultSet.getString(TITLE);
+            String description = resultSet.getString(DESCRIPTION);
+            BigDecimal price = resultSet.getBigDecimal(PRICE);
+            String slug = resultSet.getString(SLUG);
+            Boolean need_receipt = resultSet.getBoolean(NEED_RECEIPT);
+            Timestamp created_at = resultSet.getTimestamp(CREATED_AT);
+            Timestamp updated_at = resultSet.getTimestamp(UPDATED_AT);
             Medicine m = new Medicine(id, title, description, price, slug, need_receipt, created_at, updated_at);
             medicines.add(m);
         }

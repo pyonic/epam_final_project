@@ -1,4 +1,4 @@
-package com.epammurodil.controller.command.impl;
+package com.epammurodil.controller.command.impl.order;
 
 import com.epammurodil.constants.EntityConstants;
 import com.epammurodil.constants.EntityFields;

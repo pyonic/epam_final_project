@@ -1,5 +1,6 @@
 package com.epammurodil.model.dao.impl;
 
+import static com.epammurodil.constants.QueryConstants.*;
 import com.epammurodil.model.EntityQueries.AccountQueries;
 import com.epammurodil.model.dao.EntityDao;
 import com.epammurodil.model.database.DatabaseConnection;
@@ -21,15 +22,14 @@ public class AccountDao implements EntityDao<Account> {
     public List<Account> parseResult(ResultSet resultSet) throws SQLException {
         List<Account> accounts = new ArrayList<>();
         while(resultSet.next()) {
-            int userId = resultSet.getInt("id");
-            String first_name = resultSet.getString("first_name");
-            String last_name = resultSet.getString("last_name");
-            String email = resultSet.getString("email");
-            String phone = resultSet.getString("phone");
-            String password = resultSet.getString("password");
-            String role = resultSet.getString("role");
+            int userId = resultSet.getInt(ID);
+            String first_name = resultSet.getString(FIRST_NAME);
+            String last_name = resultSet.getString(LAST_NAME);
+            String email = resultSet.getString(EMAIL);
+            String phone = resultSet.getString(PHONE);
+            String password = resultSet.getString(PASSWORD);
+            String role = resultSet.getString(ROLE);
             Account account = new Account(userId, first_name, last_name, email, phone,password, role);
-            System.out.println("New acc " + account);
             accounts.add(account);
         }
         return accounts;

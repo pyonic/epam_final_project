@@ -1,4 +1,4 @@
-package com.epammurodil.controller.command.impl;
+package com.epammurodil.controller.command.impl.order;
 
 import com.epammurodil.constants.QueryConstants;
 import com.epammurodil.constants.ControllerConstants;

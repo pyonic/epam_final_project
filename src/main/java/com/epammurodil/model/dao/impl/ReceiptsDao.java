@@ -1,5 +1,6 @@
 package com.epammurodil.model.dao.impl;
 
+import com.epammurodil.constants.QueryConstants;
 import com.epammurodil.model.EntityQueries.ReceiptQueries;
 import com.epammurodil.model.dao.EntityDao;
 import com.epammurodil.model.database.DatabaseConnection;
@@ -23,10 +24,10 @@ public class ReceiptsDao implements EntityDao<Receipt> {
     public List<Receipt> parseReceipts(ResultSet resultSet) throws SQLException {
         List<Receipt> result = new ArrayList<>();
         while(resultSet.next()) {
-            int id = resultSet.getInt("id");
-            int customer_id = resultSet.getInt("customer_id");
-            String descriptions = resultSet.getString("description");
-            String status = resultSet.getString("status");
+            int id = resultSet.getInt(QueryConstants.ID);
+            int customer_id = resultSet.getInt(QueryConstants.CUSTOMER_ID);
+            String descriptions = resultSet.getString(QueryConstants.DESCRIPTION);
+            String status = resultSet.getString(QueryConstants.STATUS);
             Receipt receipts1 = new Receipt(id, customer_id, descriptions, status);
             result.add(receipts1);
         }

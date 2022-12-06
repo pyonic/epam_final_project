@@ -1,7 +1,7 @@
 package com.epammurodil.controller.command.impl;
 
 import com.epammurodil.constants.EntityConstants;
-import com.epammurodil.constants.QueryConstants;
+import static com.epammurodil.constants.QueryConstants.*;
 import com.epammurodil.constants.ControllerConstants;
 import com.epammurodil.controller.command.Command;
 import com.epammurodil.controller.navigation.Router;
@@ -22,16 +22,16 @@ public class DefaultCommand  implements Command {
     public Router execute(HttpServletRequest request) throws UnexpectedException {
         String page = ControllerConstants.DEFAULT_PAGE;
         HttpSession session = request.getSession();
-        Account account = (Account) request.getAttribute(QueryConstants.SESSION_USER);
+        Account account = (Account) request.getAttribute(SESSION_USER);
 
         if (account != null && account.getRole().equals(EntityConstants.DOCTOR_ROLE)) {
-            String order_for = request.getParameter(QueryConstants.ORDER_FOR);
-            String description = request.getParameter(QueryConstants.DESCRIPTION);
-            String current_receipt_id = request.getParameter(QueryConstants.RECEIPT_ID);
+            String order_for = request.getParameter(ORDER_FOR);
+            String description = request.getParameter(DESCRIPTION);
+            String current_receipt_id = request.getParameter(RECEIPT_ID);
             if (order_for != null) {
-                session.setAttribute(QueryConstants.ORDER_FOR, order_for);
-                session.setAttribute(QueryConstants.DESCRIPTION, description);
-                session.setAttribute(QueryConstants.RECEIPT_ID, current_receipt_id);
+                session.setAttribute(ORDER_FOR, order_for);
+                session.setAttribute(DESCRIPTION, description);
+                session.setAttribute(RECEIPT_ID, current_receipt_id);
                 return new Router(ControllerConstants.MAIN_PAGE_ROUTER, Router.PageChangeType.REDIRECT);
             }
         }
@@ -42,7 +42,7 @@ public class DefaultCommand  implements Command {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        request.setAttribute(QueryConstants.MEDICINES, medicines);
+        request.setAttribute(MEDICINES, medicines);
         return new Router(page, Router.PageChangeType.FORWARD);
     }
 }

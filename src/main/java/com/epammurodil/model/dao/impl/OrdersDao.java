@@ -1,5 +1,6 @@
 package com.epammurodil.model.dao.impl;
 
+import static com.epammurodil.constants.QueryConstants.*;
 import com.epammurodil.model.EntityQueries.OrderQueries;
 import com.epammurodil.model.dao.EntityDao;
 import com.epammurodil.model.database.DatabaseConnection;
@@ -17,7 +18,6 @@ import java.util.Optional;
 
 public class OrdersDao implements EntityDao<Order> {
     public static OrdersDao instance = new OrdersDao();
-
     private OrdersDao() {};
 
     public static OrdersDao getInstance() {
@@ -27,17 +27,17 @@ public class OrdersDao implements EntityDao<Order> {
     public List<Order> parseOrders(ResultSet resultSet) throws SQLException {
         List<Order> orders = new ArrayList<>();
         while (resultSet.next()) {
-            int id = resultSet.getInt("id");
-            int medicine_id = resultSet.getInt("medicine_id");
-            int customer_id = resultSet.getInt("customer_id");
-            BigDecimal amount = resultSet.getBigDecimal("amount");
-            BigDecimal dosage = resultSet.getBigDecimal("dosage");
-            BigDecimal price = resultSet.getBigDecimal("price");
-            String delivery_address = resultSet.getString("delivery_address");
-            String status = resultSet.getString("status");
+            int id = resultSet.getInt(ID);
+            int medicine_id = resultSet.getInt(MEDICINE_ID);
+            int customer_id = resultSet.getInt(CUSTOMER_ID);
+            BigDecimal amount = resultSet.getBigDecimal(AMOUNT);
+            BigDecimal dosage = resultSet.getBigDecimal(DOSAGE);
+            BigDecimal price = resultSet.getBigDecimal(PRICE);
+            String delivery_address = resultSet.getString(DELIVERY_ADDRESS);
+            String status = resultSet.getString(STATUS);
             String fname = resultSet.getString("fname");
             String lname = resultSet.getString("lname");
-            String email = resultSet.getString("email");
+            String email = resultSet.getString(EMAIL);
             String mtitle = resultSet.getString("mtitle");
             Account customer = new Account(fname, lname, email, null, null, null);
             Medicine medicine = new Medicine(mtitle, null, null, null, false);
