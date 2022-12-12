@@ -1,12 +1,14 @@
-import com.epammurodil.constants.QueryConstants;
-import com.epammurodil.model.entity.Account;
-import com.epammurodil.model.entity.Medicine;
-import com.epammurodil.model.entity.Rating;
-import com.epammurodil.service.impl.AccountServiceImpl;
-import com.epammurodil.service.impl.MedicineServiceImpl;
+import com.epam.murodil.constants.QueryConstants;
+import com.epam.murodil.exceptions.DaoException;
+import com.epam.murodil.exceptions.ServiceException;
+import com.epam.murodil.model.entity.Account;
+import com.epam.murodil.model.entity.Medicine;
+import com.epam.murodil.model.entity.Rating;
+import com.epam.murodil.service.impl.AccountServiceImpl;
+import com.epam.murodil.service.impl.MedicineServiceImpl;
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.epammurodil.service.impl.RatingServiceImpl;
+import com.epam.murodil.service.impl.RatingServiceImpl;
 import org.junit.jupiter.api.*;
 
 import java.math.BigDecimal;
@@ -25,14 +27,14 @@ public class MedicineTest {
     public static final String DELIVERY_ADDRESS = "177A Bleecker Street, New York City, NY 10012-1406";
 
     @BeforeAll
-    static void prepareDatas() {
+    static void prepareDatas() throws ServiceException {
         Map signUpMap = AccountServiceImpl.getInstance().signUpAccount(TestDatasets.TEST_FNAME, TestDatasets.TEST_LNAME, TestDatasets.TEST_EMAIL, null, TestDatasets.TEST_PASSWORD, TestDatasets.TEST_PASSWORD);
         ACCOUNT = (Account) signUpMap.get(QueryConstants.SESSION_USER);
     }
 
     @Test
     @Order(1)
-    void getOrderDatas() throws SQLException {
+    void getOrderDatas() throws DaoException, ServiceException {
         MEDICINE_SLUG = MedicineServiceImpl.getInstance().insertMedicine(TestDatasets.MEDICINE_NAME,TestDatasets.MEDICINE_DESCRIPTION, TestDatasets.MEDICINE_PRICE, false);
         MEDICINE = MedicineServiceImpl.getInstance().getBySlag(MEDICINE_SLUG);
         assertNotNull(MEDICINE);
@@ -40,7 +42,7 @@ public class MedicineTest {
 
     @Test
     @Order(2)
-    void setRatingForMedicine() throws UnexpectedException {
+    void setRatingForMedicine() throws DaoException, ServiceException {
         RatingServiceImpl.getInstance().insertRating(MEDICINE.getId(), 4, "Good product", ACCOUNT.getId());
         List<Rating> ratings = RatingServiceImpl.getInstance().getRatingsForMedicine(MEDICINE.getId());
         assertEquals(1, ratings.size());
@@ -54,7 +56,7 @@ public class MedicineTest {
     }
 
     @AfterAll
-    static void deleteAllData() throws UnexpectedException {
+    static void deleteAllData() throws DaoException {
         MedicineServiceImpl.getInstance().deleteOne(MEDICINE.getId());
         AccountServiceImpl.getInstance().deleteByMail(ACCOUNT.getEmail());
     }

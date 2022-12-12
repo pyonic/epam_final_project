@@ -6,14 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 09.11.2022
-  Time: 22:52
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page import="com.epammurodil.controller.command.QueryCommands" %>
 <jsp:include page="components/header.jsp" />
 <jsp:include page="components/navigation.jsp" />
 <div class="container tcc">

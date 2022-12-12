@@ -24,11 +24,11 @@ mvn clean flyway:migrate -D flyway.configFiles=flywaycnf.conf
 - User friendly urls 
 ## Screenshots
 Main page
-![img.png](img.png)
+![img.png](readme_sources/img.png)
 
 Medicine page
-![img_1.png](img_1.png)
+![img_1.png](readme_sources/img_1.png)
 
 Auth pages
-![img_2.png](img_2.png)
-![img_3.png](img_3.png)
+![img_2.png](readme_sources/img_2.png)
+![img_3.png](readme_sources/img_3.png)

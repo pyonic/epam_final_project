@@ -6,15 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 09.11.2022
-  Time: 22:52
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page import="com.epammurodil.controller.command.QueryCommands" %>
-<%@ page import="com.epammurodil.constants.QueryConstants" %>
 <jsp:include page="components/header.jsp" />
 <jsp:include page="components/navigation.jsp" />
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -44,12 +35,12 @@
             </div>
         </div>
         <div class="action_box">
-            <% if (session.getAttribute(QueryConstants.SESSION_USER_ROLE).equals("ADMIN") || session.getAttribute(QueryConstants.SESSION_USER_ROLE).equals("PHARMACIST")) { %>
-            <form method="POST" action="/pharmacy?query=DELETE_MEDICINE">
-                <input type="hidden" value="${medicine.getId()}" name="medicine_id">
-                <button type="submit" class="btn btn-danger reviewbtn">Delete</button>
-            </form>
-            <% } %>
+            <c:if test="${sessionScope.SESSION_USER_ROLE == 'ADMIN' || sessionScope.SESSION_USER_ROLE == 'PHARMACIST'}">
+                <form method="POST" action="/pharmacy?query=DELETE_MEDICINE">
+                    <input type="hidden" value="${medicine.getId()}" name="medicine_id">
+                    <button type="submit" class="btn btn-danger reviewbtn">Delete</button>
+                </form>
+            </c:if>
             <c:choose>
                 <c:when test="${sessionScope.SESSION_USER != null}">
                     <button type="button" class="btn btn-primary reviewbtn" data-toggle="modal" data-target="#new_order" data-whatever="@getbootstrap">Make order</button>
@@ -137,7 +128,7 @@
             </div>
         </form>
     </div>
-<% if (session.getAttribute("description") != null) { %>
+<c:if test="${sessionScope.description != null}" >
     <div class="modal" tabindex="-1" role="dialog" id="desc">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -148,7 +139,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p><%= session.getAttribute("description") %></p>
+                    <p>${session.getAttribute("description")}</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary modal_cls" data-dismiss="modal">Close</button>
@@ -156,7 +147,7 @@
             </div>
         </div>
     </div>
-<% } %>
+</c:if>
 <jsp:include page="components/footer.jsp" />
 <script type="text/javascript">
     $(window).on('load', function() {

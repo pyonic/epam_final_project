@@ -5,7 +5,7 @@
   Time: 22:52
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="com.epammurodil.controller.command.QueryCommands" %>
+<%@ page import="com.epam.murodil.controller.command.QueryCommands" %>
 <jsp:include page="components/header.jsp" />
 <jsp:include page="components/navigation.jsp" />
 <div class="container">

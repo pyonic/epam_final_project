@@ -1,4 +1,4 @@
-<%@ page import="com.epammurodil.constants.QueryConstants" %><%--
+<%@ page import="com.epam.murodil.constants.QueryConstants" %><%--
   Created by IntelliJ IDEA.
   User: user
   Date: 30.11.2022
@@ -24,7 +24,7 @@
                     </div>
                     <div class="price">${order.getPrice()}$</div>
                 </div>
-                <% if (session.getAttribute(QueryConstants.SESSION_USER_ROLE).equals("PHARMACIST") || session.getAttribute(QueryConstants.SESSION_USER_ROLE).equals("ADMIN")) { %>
+                <c:if test="${sessionScope.SESSION_USER_ROLE == 'PHARMACIST' || sessionScope.SESSION_USER_ROLE == 'ADMIN'}">
                     <div class="order_actions">
                         <form method="POST" style="display: flex;">
                             <input type="hidden" name="order_id" value="${order.getId()}">
@@ -38,7 +38,7 @@
                             <button class="btn btn-primary" type="submit">Update</button>
                         </form>
                     </div>
-                <% } %>
+                </c:if>
             </div>
         </c:forEach>
     </div>

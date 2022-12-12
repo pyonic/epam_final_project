@@ -1,10 +1,12 @@
 import static org.junit.jupiter.api.Assertions.*;
-import com.epammurodil.constants.QueryConstants;
-import com.epammurodil.model.entity.Account;
-import com.epammurodil.model.entity.Medicine;
-import com.epammurodil.service.impl.AccountServiceImpl;
-import com.epammurodil.service.impl.MedicineServiceImpl;
-import com.epammurodil.service.impl.OrdersServiceImpl;
+import com.epam.murodil.constants.QueryConstants;
+import com.epam.murodil.exceptions.DaoException;
+import com.epam.murodil.exceptions.ServiceException;
+import com.epam.murodil.model.entity.Account;
+import com.epam.murodil.model.entity.Medicine;
+import com.epam.murodil.service.impl.AccountServiceImpl;
+import com.epam.murodil.service.impl.MedicineServiceImpl;
+import com.epam.murodil.service.impl.OrdersServiceImpl;
 import org.junit.jupiter.api.*;
 
 import java.math.BigDecimal;
@@ -24,7 +26,7 @@ public class OrdersTest {
     public static final String DELIVERY_ADDRESS = "177A Bleecker Street, New York City, NY 10012-1406";
 
     @BeforeAll
-    static void getOrderDatas() throws SQLException {
+    static void getOrderDatas() throws DaoException, ServiceException {
         MEDICINE_SLUG = MedicineServiceImpl.getInstance().insertMedicine(TestDatasets.MEDICINE_NAME,TestDatasets.MEDICINE_DESCRIPTION, TestDatasets.MEDICINE_PRICE, false);
         MEDICINE = MedicineServiceImpl.getInstance().getBySlag(MEDICINE_SLUG);
 
@@ -34,23 +36,23 @@ public class OrdersTest {
 
     @Test
     @Order(1)
-    void makeOrder() throws UnexpectedException, SQLException {
+    void makeOrder() throws UnexpectedException, DaoException {
         boolean inserted = OrdersServiceImpl.getInstance().insert(MEDICINE.getId(), ACCOUNT.getId(), DOSAGE, DOSAGE, DELIVERY_ADDRESS);
         assertEquals(true, inserted);
     }
 
     @Test
     @Order(2)
-    void checkAccountOrders() {
-        List<com.epammurodil.model.entity.Order> orders = OrdersServiceImpl.instance.getUserOrders(ACCOUNT.getId());
-        com.epammurodil.model.entity.Order order = orders.get(0);
+    void checkAccountOrders() throws DaoException {
+        List<com.epam.murodil.model.entity.Order> orders = OrdersServiceImpl.instance.getUserOrders(ACCOUNT.getId());
+        com.epam.murodil.model.entity.Order order = orders.get(0);
         assertEquals(1, orders.size());
         assertEquals(DOSAGE.multiply(MEDICINE.getPrice()) , order.getPrice().multiply(BigDecimal.valueOf(1.0)));
         ORDER_ID = orders.get(0).getId();
     }
 
     @AfterAll
-    static void deleteAllTestDatas() throws UnexpectedException {
+    static void deleteAllTestDatas() throws UnexpectedException, DaoException {
         MedicineServiceImpl.getInstance().deleteOne(MEDICINE.getId());
         AccountServiceImpl.getInstance().deleteByMail(ACCOUNT.getEmail());
         OrdersServiceImpl.getInstance().deleteById(ORDER_ID);

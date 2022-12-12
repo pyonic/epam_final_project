@@ -6,8 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="com.epammurodil.constants.ControllerConstants" %>
-<%@page import="com.epammurodil.controller.command.QueryCommands" %>
 <jsp:include page="components/header.jsp" />
 <jsp:include page="components/navigation.jsp"></jsp:include>
 
@@ -48,14 +46,10 @@
                     <label class="form-label">Please, repeat password*</label>
                 </div>
             </div>
-            <!-- Password input -->
             <div style="color: rgba(243,54,54,0.67); text-align: center; margin-bottom: 5px;">${error}</div>
-            <!-- 2 column grid layout for inline styling -->
 
-            <!-- Submit button -->
             <button type="submit" class="btn btn-primary btn-block mb-4" value="Register" style="margin: 0 auto">Sign Up</button>
 
-            <!-- Register buttons -->
             <div class="text-center">
                 <p>Already have an account? <a href="/login">Log-in</a></p>
             </div>

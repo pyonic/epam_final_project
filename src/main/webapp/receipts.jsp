@@ -1,4 +1,4 @@
-<%@ page import="com.epammurodil.constants.QueryConstants" %><%--
+<%@ page import="com.epam.murodil.constants.QueryConstants" %><%--
   Created by IntelliJ IDEA.
   User: user
   Date: 01.12.2022
@@ -25,16 +25,19 @@
         <div class="m_info">
           <div class="m_description">${receipt.getDescription()}</div>
         </div>
-        <% if (session.getAttribute(QueryConstants.SESSION_USER_ROLE).equals("DOCTOR")) { %>
-          <div class="status" style="color: #ffb100; font-size: 16px">
-            <a href="/?order_for=${receipt.getCustomer_id()}&current_receipt_id=${receipt.getId()}&description=${receipt.getDescription()}">Order for customer</a>
-          </div>
-        <% } else { %>
-        <div class="status" style="color: #ffb100; font-size: 16px">
-          <i class="fas fa-hourglass"></i>
-          <i class="fa fa-check" aria-hidden="true"></i>
-        </div>
-        <% } %>
+        <c:choose>
+          <c:when test="${sessionScope.SESSION_USER_ROLE == 'DOCTOR'}">
+            <div class="status" style="color: #ffb100; font-size: 16px">
+              <a href="/?order_for=${receipt.getCustomer_id()}&current_receipt_id=${receipt.getId()}&description=${receipt.getDescription()}">Order for customer</a>
+            </div>
+          </c:when>
+          <c:otherwise>
+            <div class="status" style="color: #ffb100; font-size: 16px">
+              <i class="fas fa-hourglass"></i>
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+          </c:otherwise>
+        </c:choose>
       </div>
     </c:forEach>
   </div>
